@@ -171,6 +171,88 @@ DB_USERNAME=laravel
 DB_PASSWORD=password
 ```
 
+## Deployment to Render
+
+### Prerequisites
+
+- [Render](https://render.com) account
+- Git repository with your code
+
+### Deployment Steps
+
+#### Option 1: Deploy from GitHub (Recommended)
+
+1. **Push your code to GitHub**
+   ```bash
+   git add .
+   git commit -m "Prepare for deployment"
+   git push origin main
+   ```
+
+2. **Create a new Web Service on Render**
+   - Go to [Render Dashboard](https://dashboard.render.com)
+   - Click "New" → "Web Service"
+   - Connect your GitHub repository
+
+3. **Configure the service**
+   - Name: `todo-app`
+   - Environment: `Docker`
+   - Region: `Oregon` (or your preferred region)
+   - Plan: `Free`
+
+4. **Add Environment Variables**
+   - `APP_ENV`: `production`
+   - `APP_DEBUG`: `false`
+   - `APP_KEY`: (generate with `php artisan key:generate`)
+
+5. **Create a MySQL Database**
+   - Go to "New" → "PostgreSQL" or "MySQL"
+   - Name: `todo-mysql`
+   - Plan: `Free`
+
+6. **Deploy**
+   - Click "Create Web Service"
+   - Wait for the build to complete
+
+#### Option 2: Deploy using render.yaml
+
+1. **Push to GitHub**
+   ```bash
+   git add .
+   git commit -m "Add render.yaml for deployment"
+   git push origin main
+   ```
+
+2. **Import on Render**
+   - Go to [Render Dashboard](https://dashboard.render.com)
+   - Click "New" → "Import" → "render.yaml"
+   - Connect your repository
+
+3. **Deploy**
+   - Render will automatically create the web service and MySQL database
+
+### Important Notes
+
+- **Generate APP_KEY** for production:
+  ```bash
+  php artisan key:generate --show
+  ```
+
+- **Run migrations** after deployment:
+  - Render automatically runs `CMD` from Dockerfile, but you may need to use a post-deploy command or SSH to run `php artisan migrate`
+
+- **Free tier limitations**:
+  - Services sleep after 15 minutes of inactivity
+  - MySQL free tier has limited storage
+  - Automatic deployments on push to main branch
+
+### Files for Deployment
+
+- `Dockerfile` - Container configuration
+- `render.yaml` - Render configuration (optional)
+- `.dockerignore` - Exclude files from Docker build
+- `.env.production` - Production environment template
+
 ## License
 
 MIT License
