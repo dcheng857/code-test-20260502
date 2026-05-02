@@ -6,34 +6,22 @@ services:
     plan: free
     dockerfilePath: Dockerfile
     dockerContext: .
-    postDeployCommand: php artisan migrate --force
     envVars:
       - key: APP_ENV
         value: production
       - key: APP_DEBUG
         value: false
-      - key: DB_HOST
+      - key: DB_CONNECTION
+        value: pgsql
+      - key: DATABASE_URL
         fromDatabase:
-          name: todo-mysql
-          property: host
-      - key: DB_DATABASE
-        fromDatabase:
-          name: todo-mysql
-          property: database
-      - key: DB_USERNAME
-        fromDatabase:
-          name: todo-mysql
-          property: username
-      - key: DB_PASSWORD
-        fromDatabase:
-          name: todo-mysql
-          property: password
+          name: todo-db
+          property: connectionString
       - key: APP_KEY
         generateValue: true
 
 databases:
-  - name: todo-mysql
-    type: mysql
-    version: 8.0
+  - name: todo-db
+    type: postgres
     plan: free
     region: oregon

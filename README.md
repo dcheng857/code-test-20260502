@@ -8,7 +8,7 @@ A modern todo application built with Laravel 11, Vue 3, InertiaJS, Tailwind CSS,
 - **Frontend**: Vue 3 + TypeScript
 - **Routing**: InertiaJS
 - **Styling**: Tailwind CSS
-- **Database**: MySQL 8.4
+- **Database**: MySQL 8.4 (Local) / PostgreSQL (Render)
 - **Testing**: PHPUnit
 
 ## Features
@@ -20,6 +20,7 @@ A modern todo application built with Laravel 11, Vue 3, InertiaJS, Tailwind CSS,
 - Toast notifications
 - Responsive UI with Tailwind CSS
 - Comprehensive unit & feature tests
+- Multi-database support (MySQL/PostgreSQL)
 
 ## Project Structure
 
