@@ -69,8 +69,12 @@ RUN echo "[supervisord]" >> /etc/supervisor/supervisord.conf && \
 # Copy nginx configuration
 COPY docker/nginx/default.conf /etc/nginx/sites-available/default
 
+# Copy entrypoint script
+COPY docker/entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
 # Expose port 80
 EXPOSE 80
 
-# Start supervisor
-CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/supervisord.conf"]
+# Start entrypoint script
+ENTRYPOINT ["/entrypoint.sh"]
