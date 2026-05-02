@@ -57,7 +57,7 @@ RUN echo "[supervisord]" >> /etc/supervisor/supervisord.conf && \
     echo "nodaemon=true" >> /etc/supervisor/supervisord.conf && \
     echo "" >> /etc/supervisor/supervisord.conf && \
     echo "[program:php]" >> /etc/supervisor/supervisord.conf && \
-    echo "command=/usr/local/bin/php-fpm" >> /etc/supervisor/supervisord.conf && \
+    echo "command=/usr/local/sbin/php-fpm" >> /etc/supervisor/supervisord.conf && \
     echo "autostart=true" >> /etc/supervisor/supervisord.conf && \
     echo "autorestart=true" >> /etc/supervisor/supervisord.conf && \
     echo "" >> /etc/supervisor/supervisord.conf && \
